@@ -149,6 +149,44 @@ class EddyWanVideoTextEncode:
                     "rapid whip-pan right / 快速右甩",
                     "time-lapse / 延时"
                 ], {"default": "none"}),
+                "color_grading": ([
+                    "none",
+                    "teal-and-orange / 橘蓝调色",
+                    "bleach-bypass / 漂白旁路",
+                    "kodak portra / 柯达Portra"
+                ], {"default": "none"}),
+                "lighting_style": ([
+                    "none",
+                    "volumetric dusk / 体积黄昏",
+                    "harsh noon sun / 正午强光",
+                    "neon rim light / 霓虹缘光"
+                ], {"default": "none"}),
+                "lens_style": ([
+                    "none",
+                    "anamorphic bokeh / 变形宽银幕虚化",
+                    "16mm grain / 16mm胶片颗粒",
+                    "CGI stylized / CGI风格化"
+                ], {"default": "none"}),
+                "film_stock": ([
+                    "none",
+                    "Kodak Vision3 500T / 柯达500T",
+                    "Kodak Ektachrome / 柯达Ektachrome",
+                    "Cinestill 800T / Cinestill 800T",
+                    "Fujifilm Velvia 50 / 富士Velvia 50",
+                    "Fuji Eterna / 富士Eterna",
+                    "Ilford HP5 / Ilford HP5"
+                ], {"default": "none"}),
+                "color_palette": ([
+                    "none",
+                    "high-contrast / 高对比度",
+                    "low-contrast / 低对比度",
+                    "low-saturation / 低饱和度",
+                    "muted colors / 柔和色",
+                    "pastel tones / 马卡龙色",
+                    "monochrome / 单色",
+                    "sepia tone / 棕褐色",
+                    "duotone cyan-orange / 青橙双色"
+                ], {"default": "none"}),
                 "force_offload": ("BOOLEAN", {"default": True}),
                 "use_disk_cache": ("BOOLEAN", {"default": False}),
                 "device": (["gpu", "cpu"], {"default": "gpu"}),
@@ -162,12 +200,13 @@ class EddyWanVideoTextEncode:
     DESCRIPTION = "Eddy's standalone WanVideo TextEncode with integrated cinematic and motion controls"
 
     def process(self, positive_prompt, negative_prompt, t5=None, model_to_offload=None,
-                enable_cinematic=True, time="Day time", light_source="Daylight",
-                light_intensity="Soft lighting", light_angle="Side lighting",
-                color_tone="Warm colors", shot_size="Medium shot",
-                camera_angle="none", composition="Center composition",
-                camera_motion="none", force_offload=True,
-                use_disk_cache=False, device="gpu"):
+                enable_cinematic=True, time="none", light_source="none",
+                light_intensity="none", light_angle="none",
+                color_tone="none", shot_size="none",
+                camera_angle="none", composition="none",
+                camera_motion="none", color_grading="none", lighting_style="none",
+                lens_style="none", film_stock="none", color_palette="none",
+                force_offload=True, use_disk_cache=False, device="gpu"):
 
         if enable_cinematic:
             terms = []
@@ -180,7 +219,12 @@ class EddyWanVideoTextEncode:
                 ("镜头尺寸", shot_size),
                 ("拍摄角度", camera_angle),
                 ("构图", composition),
-                ("运镜", camera_motion)
+                ("运镜", camera_motion),
+                ("调色", color_grading),
+                ("光照风格", lighting_style),
+                ("镜头风格", lens_style),
+                ("胶片", film_stock),
+                ("色彩母题", color_palette)
             ]
             
             for prefix_cn, value in prefix_map:
