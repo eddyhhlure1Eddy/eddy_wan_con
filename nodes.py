@@ -152,28 +152,35 @@ class EddyWanVideoTextEncode:
                 ], {"default": "none"}),
                 "camera_motion": ([
                     "none",
-                    "static / 静止",
-                    "pan left / 左摇",
-                    "pan right / 右摇",
-                    "tilt up / 上倾",
-                    "tilt down / 下倾",
-                    "dolly in / 推进",
-                    "dolly out / 拉远",
-                    "pull back / 后退",
-                    "crane up / 升起",
-                    "crane down / 下降",
-                    "orbital arc / 弧线环绕",
-                    "orbit left / 左环绕",
-                    "orbit right / 右环绕",
-                    "360 orbit / 360度环绕",
-                    "tracking shot / 追踪",
-                    "crash zoom / 快速变焦",
-                    "camera roll / 翻滚",
-                    "slow-motion pan left / 慢动作左摇",
-                    "slow-motion pan right / 慢动作右摇",
-                    "rapid whip-pan left / 快速左甩",
-                    "rapid whip-pan right / 快速右甩",
-                    "time-lapse / 延时"
+                    "static / 静止 ✓",
+                    "pan left / 左摇 ✓",
+                    "pan right / 右摇 ✓",
+                    "tilt up / 上倾 ✓",
+                    "tilt down / 下倾 ✓",
+                    "dolly in / 推进 ✓",
+                    "dolly out / 拉远 ✓",
+                    "pull back / 后退 ✓",
+                    "zoom in / 放大 ✓",
+                    "zoom out / 缩小 ✓",
+                    "crash zoom / 快速变焦 ✓",
+                    "crane up / 升起 ✓",
+                    "crane down / 下降 ✓",
+                    "orbital arc / 环绕弧线 ⚠",
+                    "orbiting shot / 环绕镜头 ⚠",
+                    "orbit left / 左环绕 (不推荐)",
+                    "orbit right / 右环绕 (不推荐)",
+                    "360 orbit / 360度环绕 (不稳定)",
+                    "tracking shot / 跟踪镜头 ✓",
+                    "track upward / 上跟踪 ✓",
+                    "track downward / 下跟踪 ✓",
+                    "camera roll / 镜头翻滚 ✓",
+                    "slow-motion / 慢动作 ✓",
+                    "slow-motion pan left / 慢动作左摇 (分开使用)",
+                    "slow-motion pan right / 慢动作右摇 (分开使用)",
+                    "rapid whip-pan / 快速甩镜 ✓",
+                    "rapid whip-pan left / 快速左甩 (不必指定方向)",
+                    "rapid whip-pan right / 快速右甩 (不必指定方向)",
+                    "time-lapse / 延时摄影 ✓"
                 ], {"default": "none"}),
                 "color_grading": ([
                     "none",
@@ -282,6 +289,11 @@ class EddyWanVideoTextEncode:
                 if value != "none" and value:
                     # Extract English part only (before " / ")
                     value_en = value.split(" / ")[0] if " / " in value else value
+                    # Remove UI annotations (✓, ⚠, and parentheses notes)
+                    value_en = value_en.replace(" ✓", "").replace(" ⚠", "").strip()
+                    # Remove any parentheses notes like (不推荐), (不稳定), etc.
+                    if "(" in value_en:
+                        value_en = value_en.split("(")[0].strip()
                     terms.append(f"{prefix_cn}：{value_en}")
             
             if terms:
