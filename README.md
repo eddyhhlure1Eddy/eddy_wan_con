@@ -12,8 +12,9 @@ Author: eddy
 - Ενσωματωμένοι έλεγχοι κινηματογραφίας (χρόνος, φωτισμός, χρωματική τονικότητα, μέγεθος πλάνου, γωνία λήψης, σύνθεση)
 - Ενσωματωμένοι έλεγχοι κίνησης κάμερας (pan, tilt, dolly, crane, orbit, tracking, zoom, roll)
 - Ενσωματωμένοι έλεγχοι αισθητικής (color grading, lighting style, lens style, film stock, color palette)
+- Ενσωματωμένοι έλεγχοι οπτικού στυλ (visual style: anime, realistic, 2.5D, Chinese style, pixel art κ.ά.)
 - Επεκταμένοι έλεγχοι φωτισμού (40 επιλογές: rembrandt, golden hour, three-point, rim light κ.ά.)
-- 15 κατηγορίες ελέγχου με 108 επιλογές συνολικά
+- 16 κατηγορίες ελέγχου με 127 επιλογές συνολικά
 - Αυτόματη προσθήκη επιλεγμένων όρων πριν από την κύρια προτροπή
 - Υποστήριξη των αρχικών δυνατοτήτων: prompt travel (|), EchoShot ([1]), συντακτικό βαρών (text:1.5)
 - Υποστήριξη προσωρινής μνήμης στον δίσκο
@@ -39,6 +40,7 @@ WanVideoSampler
 
 **Προαιρετικοί Κινηματογραφικοί Έλεγχοι:**
 - `enable_cinematic`: Ενεργοποίηση/Απενεργοποίηση (προεπιλογή: true)
+- `visual_style`: photorealistic/anime/cel-shaded/2.5D/Chinese style/pixel art/3D game κ.ά. (19 επιλογές)
 - `time`: Day/Night/Dawn/Sunrise
 - `light_source`: Daylight/Artificial/Moonlight/Fire κ.ά. (8 επιλογές)
 - `light_intensity`: Soft/Hard/Diffused/Dramatic/Ambient/Contrasty lighting (6 επιλογές)
@@ -97,8 +99,9 @@ WanVideoSampler
 | Κινηματογραφικοί έλεγχοι (9 κατηγορίες) | Όχι | Ναι (ενσωματωμένοι) |
 | Έλεγχοι κίνησης κάμερας (23 επιλογές) | Όχι | Ναι (ενσωματωμένοι) |
 | Έλεγχοι αισθητικής (6 κατηγορίες, 29 επιλογές) | Όχι | Ναι (ενσωματωμένοι) |
+| Έλεγχοι οπτικού στυλ (19 επιλογές) | Όχι | Ναι (ενσωματωμένοι) |
 | Έλεγχοι φωτισμού (40 επιλογές συνολικά) | Όχι | Ναι (επεκταμένοι) |
-| Σύνολο επιλογών ελέγχου | 0 | 108 |
+| Σύνολο επιλογών ελέγχου | 0 | 127 |
 | Απαιτούνται ξεχωριστά prefix nodes | Όχι | Όχι |
 
 ## Σημειώσεις
@@ -137,6 +140,19 @@ A girl walking in the park
 **Με προηγμένους ελέγχους φωτισμού:**
 ```
 时间：Night time, 光源：Moonlight, 光线强度：Dramatic lighting, 光照风格：rembrandt lighting, 打光技术：rim light, 运镜：dolly in, 调色：teal-and-orange, A moody portrait of a detective
+```
+
+**Με οπτικό στυλ (Νέο!):**
+```
+视觉风格：anime style, 时间：Night time, 光源：Moonlight, 运镜：dolly in, A magical girl fighting in the city
+```
+
+```
+视觉风格：Chinese style, 时间：Day time, 光源：Daylight, 运镜：crane up, A traditional Chinese garden with cherry blossoms
+```
+
+```
+视觉风格：photorealistic, 时间：Golden hour, 光源：Daylight, 光照风格：golden hour, 运镜：dolly in, A fashion model walking on the street
 ```
 
 Ο κόμβος προσθέτει αυτόματα τα προεπιθέματα· εσείς γράφετε μόνο την κύρια προτροπή.

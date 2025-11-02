@@ -60,6 +60,28 @@ class EddyWanVideoTextEncode:
                 "t5": ("WANTEXTENCODER",),
                 "model_to_offload": ("WANVIDEOMODEL", {"tooltip": "Model to move to offload_device before encoding"}),
                 "enable_cinematic": ("BOOLEAN", {"default": True}),
+                "visual_style": ([
+                    "none",
+                    "photorealistic / 写实",
+                    "anime style / 二次元动画",
+                    "cel-shaded / 三渲二",
+                    "2.5D anime / 2.5D动漫",
+                    "Chinese style / 国风",
+                    "ink painting / 水墨画",
+                    "pixel art / 像素风格",
+                    "3D game / 3D游戏",
+                    "puppet animation / 木偶动画",
+                    "impressionist / 印象派",
+                    "watercolor / 水彩",
+                    "cyberpunk / 赛博朋克",
+                    "steampunk / 蒸汽朋克",
+                    "tilt-shift / 移轴摄影",
+                    "time-lapse / 延时摄影",
+                    "handheld camera / 手持",
+                    "fashion magazine / 时尚杂志",
+                    "vintage film / 复古电影",
+                    "CGI stylized / CGI风格化"
+                ], {"default": "none"}),
                 "time": ([
                     "none",
                     "Day time / 白天",
@@ -226,7 +248,7 @@ class EddyWanVideoTextEncode:
     DESCRIPTION = "Eddy's standalone WanVideo TextEncode with integrated cinematic and motion controls"
 
     def process(self, positive_prompt, negative_prompt, t5=None, model_to_offload=None,
-                enable_cinematic=True, time="none", light_source="none",
+                enable_cinematic=True, visual_style="none", time="none", light_source="none",
                 light_intensity="none", light_angle="none",
                 color_tone="none", shot_size="none",
                 camera_angle="none", composition="none",
@@ -238,6 +260,7 @@ class EddyWanVideoTextEncode:
         if enable_cinematic:
             terms = []
             prefix_map = [
+                ("视觉风格", visual_style),
                 ("时间", time),
                 ("光源", light_source),
                 ("光线强度", light_intensity),
